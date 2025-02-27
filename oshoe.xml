@@ -1,0 +1,24 @@
+<mujoco>
+  <asset>
+    <mesh file="RightFoot.stl" />
+    <model name="skeleton"
+      file="/home/or/oshoe/myoconverter-main/models/mjc/Gait2354Simbody/gait2354_cvt3.xml" />
+    <texture type="skybox" builtin="gradient" rgb1=".3 .5 .7" rgb2="0 0 0" width="32" height="512" />
+    <texture name="body" type="cube" builtin="flat" mark="cross" width="128" height="128"
+      rgb1="0.8 0.6 0.4" rgb2="0.8 0.6 0.4" markrgb="1 1 1" />
+    <material name="body" texture="body" texuniform="true" rgba="0.8 0.6 .4 1" />
+    <texture name="grid" type="2d" builtin="checker" width="512" height="512" rgb1=".1 .2 .3"
+      rgb2=".2 .3 .4" />
+    <material name="grid" texture="grid" texrepeat="1 1" texuniform="true" reflectance=".2" />
+  </asset>
+
+  <worldbody>
+    <light name="top" pos="0 0 1" />
+    <!-- <geom name="floor" size="0 0 .1" type="plane" material="grid" condim="3" /> -->
+    <body name="right_leg" euler="0 0 180">
+      <joint name="swing" type="hinge" axis="0 1 0" pos=".07 .01 .88" ref="90" armature="3" range="6.28 0"/>
+      <geom name="calf" type="box" size=".035 .035 .40" pos=".07 .01 .44" />
+      <geom type="mesh" name="RightFoot" mesh="RightFoot" quat=".5 0 0  .5" />
+    </body>
+  </worldbody>
+</mujoco>
