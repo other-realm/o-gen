@@ -153,33 +153,34 @@ dolfin
 qual = dolfin.compute_cell_quality()
 qual.plot(show_edges=True, cpos="xy")
 # %%
-oshoe=pv.read('./output/RightFoot2025-01-17-1235.stl')
+oshoe=pv.read('../output/RightFoot2025-01-17-1235.stl')
 oshoe=oshoe.scale([1000, 1000, 1000])
 type(oshoe)
+oshoe=box
 # %%
 cpos = [
-    (7.656346967151718, -9.802071079151158, -11.021236183314311),
-    (0.2224512272564101, -0.4594554282112895, 0.5549738359311297),
-    (-0.6279216753504941, -0.7513057097368635, 0.20311105371647392),
+    (7.656346967151718, -9.82071079151158, -11.021236183314311),
+    (22.24512272564101, -45.94554282112895, .5549738359311297),
+    (-62.79216753504941, -75.13057097368635, 20.311105371647392),
 ]
-oshoe.plot(cpos=cpos, opacity=0.75)
+oshoe.plot()
 # Create a voxel model of the bounding oshoe
 voxels = pv.voxelize(oshoe, density=oshoe.length / 200)
+voxels
 p = pv.Plotter()
 p.add_mesh(voxels, color=True, show_edges=True, opacity=0.5)
 p.add_mesh(oshoe, color="lightblue", opacity=0.5)
-p.show(cpos=cpos)
+p.show()
 # We could even add a scalar field to that new voxel model in case we wanted to create grids for modelling. In this case, let's add a scalar field for bone density noting:
 voxels["density"] = np.full(voxels.n_cells, 3.65)  # g/cc
-voxels.warped_by_vector()
-voxels.plot(scalars="density", cpos=cpos)
+voxels.plot(scalars="density")
 # A constant scalar field is kind of boring, so let's get a little fancier by added a scalar field that varies by the distance from the bounding oshoe.
 voxels.compute_implicit_distance(oshoe, inplace=True)
 contours = voxels.contour(6, scalars="implicit_distance")
 p = pv.Plotter()
 p.add_mesh(voxels, opacity=0.25, scalars="implicit_distance")
 p.add_mesh(contours, opacity=0.5, scalars="implicit_distance")
-p.show(cpos=cpos)
+p.show()
 # %%
 sphere = examples.load_sphere_vectors()
 warped = sphere.warp_by_vector()
