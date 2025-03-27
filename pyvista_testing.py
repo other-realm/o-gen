@@ -195,3 +195,28 @@ p.add_text("After warp")
 p.add_mesh(warped, color='white')
 p.show()
 # %%
+oshoe=pv.read('./RightFoot.stl')
+oshoe=oshoe.scale([1000, 1000, 1000])
+# oshoe=box
+vectors = np.vstack(
+        (
+            (oshoe.points[:, 0]),
+            (oshoe.points[:, 1]),
+            (oshoe.points[:, 2]),
+        ),
+    ).T
+vectors[0:1300,0:1]=(vectors[0:1300,0:1]*5)
+# vectors[0:1200,0:2]=(vectors[0:1200,0:2]*5)
+oshoe["vectors"] = vectors * 0.3
+oshoe.set_active_vectors("vectors")
+warped = oshoe.warp_by_vector()
+type(warped)
+p = pv.Plotter(shape=(1, 2))
+p.subplot(0, 0)
+p.add_text("Before warp")
+p.add_mesh(oshoe, color='white');
+p.subplot(0, 1)
+p.add_text("After warp")
+p.add_mesh(warped, color='white');
+p.show();
+# %%

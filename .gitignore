@@ -169,3 +169,38 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+# Custom for this project
+nbproject/private/
+.history/
+.vagrant/
+laradock/
+laradock
+nextcloud/
+manager_token
+worker_token
+formatTest.json
+nextcloudLogs/
+1/logs/server/error.log
+1/logs/server/main.log
+runMe.env
+servercoop/runMe.env
+otherrealm.org-drupal/
+env/
+geomdl-examples-master/
+cq_warehouse/
+jupylet-master/
+Examples/
+OldVersions/
+Economics/
+.pptx
+.pdf
+.tmp
+Modules/
+data/
+micromamba/
+etry-clean-cach/
+models/
+MovementAnalysis/
+camel_oshoe_files/
+pytorchgeonodes/

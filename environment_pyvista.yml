@@ -1,0 +1,67 @@
+name: pyvista
+channels:
+  - conda-forge
+  - pytorch
+  - pytorch3d
+  - nvidia
+  - iopath
+  - opensim-org
+dependencies:
+- python
+- numpy
+- pip
+- numpy
+- scipy
+- matplotlib
+- sympy
+- ipython
+- ipykernel
+- ipyvtklink
+- nbconvert
+- pandas
+- panel
+- scikit-learn
+- cma
+- cadquery
+- ipyvolume
+- ipympl
+# - pytorch-cuda=12.1
+# - pytorch
+# - torchvision
+# - torchaudio
+- fvcore
+- iopath
+- plotly
+- dash
+- pywin32
+- quaternion
+- pynvml 
+- pyvista
+- trame
+- trame-vuetify
+- trame-vtk 
+- ipywidgets
+- jupyterlab 
+- vedo
+- k3d
+- meshio
+- meson
+- gmsh
+- gh
+# - opencv-python
+# - bottler
+# - nvidiacub
+# - pytorch3d
+- pip:
+  - build123d
+  - ocp-vscode
+  - cadquery-massembly
+  - torch
+  - torchvision
+  - torchaudio
+  - huggingface_hub
+  - genesis-world
+  - mujoco
+  - mediapy
+  - playground
+  - mujoco-mjx
