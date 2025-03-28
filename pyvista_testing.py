@@ -72,14 +72,14 @@ cpos = [
     (22.24512272564101, -45.94554282112895, .5549738359311297),
     (-62.79216753504941, -75.13057097368635, 20.311105371647392),
 ]
-oshoe.plot()
+# oshoe.plot()
 # Create a voxel model of the bounding oshoe
 voxels = pv.voxelize(oshoe, density=oshoe.length / 200)
 voxels
-p = pv.Plotter()
-p.add_mesh(voxels, color=True, show_edges=True, opacity=0.5)
-p.add_mesh(oshoe, color="lightblue", opacity=0.5)
-p.show()
+# p = pv.Plotter()
+# p.add_mesh(voxels, color=True, show_edges=True, opacity=0.5)
+# p.add_mesh(oshoe, color="lightblue", opacity=0.5)
+# p.show()
 # We could even add a scalar field to that new voxel model in case we wanted to create grids for modelling. In this case, let's add a scalar field for bone density noting:
 voxels["density"] = np.full(voxels.n_cells, 3.65)  # g/cc
 voxels.plot(scalars="density")
@@ -88,27 +88,28 @@ voxels.compute_implicit_distance(oshoe, inplace=True)
 contours = voxels.contour(6, scalars="implicit_distance")
 p = pv.Plotter()
 p.add_mesh(voxels, opacity=0.25, scalars="implicit_distance")
-p.add_mesh(contours, opacity=0.5, scalars="implicit_distance")
+# p.add_mesh(contours, opacity=0.5, scalars="implicit_distance")
 p.show()
 # %%
 # oshoe=box
-vectors = np.vstack(
+foot=vectors = np.vstack(
         (
-            (oshoe.points[:, 0]),
-            (oshoe.points[:, 1]),
-            (oshoe.points[:, 2]),
+            (voxels.points[:, 0]),
+            (voxels.points[:, 1]),
+            (voxels.points[:, 2]),
         ),
     ).T
-vectors[0:1300,0:1]=(vectors[0:1300,0:1]*5)
-# vectors[0:1200,0:2]=(vectors[0:1200,0:2]*5)
-oshoe["vectors"] = vectors * 0.3
-oshoe.set_active_vectors("vectors")
-warped = oshoe.warp_by_vector()
+vectors[0:130000,(1,2)]=(vectors[0:130000,(1,2)]*2)
+vectors[0:130000,0]=(vectors[0:130000,0]*2)
+vectors[130000:-1,2]=vectors[130000:-1,2]*-1
+voxels["vectors"] = vectors
+voxels.set_active_vectors("vectors")
+warped = voxels.warp_by_vector()
 type(warped)
 p = pv.Plotter(shape=(1, 2))
 p.subplot(0, 0)
 p.add_text("Before warp")
-p.add_mesh(oshoe, color='white');
+p.add_mesh(voxels, color='white');
 p.subplot(0, 1)
 p.add_text("After warp")
 p.add_mesh(warped, color='white');
